@@ -1,0 +1,10 @@
+.loginSection{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.formSection{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}

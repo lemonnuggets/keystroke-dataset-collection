@@ -1,0 +1,16 @@
+.questionSection{
+    display: flex;
+    flex-direction: column;
+}
+.questionSection > input, .questionSection > select{
+    max-width: fit-content;
+}
+.questionsSection{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+/* .formSection{
+    display: flex;
+    flex-direction: column;
+} */

@@ -1,9 +1,25 @@
-const Test1 = () => {
+import React, { useState } from 'react';
+import commonStyles from "../common.module.css";
+import styles from "./Test1.module.css";
+const Test1 = ({goNextSection, user, makeRequest}) => {
     return (
-        <div>
-            Test1
+        <div className={commonStyles.container}>
+            <h1>Test1</h1>
+            <form className={styles.formSection} action="/" method="POST">
+                <input className={commonStyles.nextButton} type="button" value="Next >" onClick={() => {
+                    const form = document.body.querySelector(
+                        `form`
+                    );
+                    if (form?.checkValidity()) {
+                        // makeRequest('questionnaire', data);
+                        goNextSection();
+                    } else {
+                        form?.reportValidity()
+                    }
+                }} />
+            </form>
         </div>
-    )
+    );
 }
 
 export default Test1
