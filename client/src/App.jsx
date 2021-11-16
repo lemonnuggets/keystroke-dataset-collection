@@ -13,7 +13,7 @@ const App = () => {
   const incrementSectionNo = () => {
     setSectionNo(prevSectionNo => prevSectionNo + 1)
   }
-  const makeRequest = (endpoint, data) => {
+  const makeRequest = (endpoint, ...data) => {
     console.log(`Making request to ${endpoint}`)
     console.log(data)
     // return fetch(endpoint, {

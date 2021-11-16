@@ -132,7 +132,7 @@ const Questionnaire = ({ goNextSection, user, makeRequest }) => {
                             }, {}),
                         };
                         console.log(data);
-                        makeRequest('questionnaire', data);
+                        makeRequest('questionnaire', user, data);
                         goNextSection();
                     } else {
                         form?.reportValidity()
