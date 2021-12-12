@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./TestInput.module.css";
+import { useState } from "react";
 const TestInput = ({ pattern, keyStrokes, textBoxValue, setTextBoxValue }) => {
-    const currentlyPressedKeys = [];
+    const [currentlyPressedKeys, setCurrentlyPressedKeys] = useState([])
     return (
         <input
             className={styles.textBox}
@@ -19,7 +20,7 @@ const TestInput = ({ pattern, keyStrokes, textBoxValue, setTextBoxValue }) => {
                         keyPressInfo.keyPressedFor = 4;
                         keyPressInfo.keyUpTime - keyPressInfo.keyDownTime;
                         keyStrokes.push(keyPressInfo);
-                        currentlyPressedKeys.splice(i, 1);
+                        setCurrentlyPressedKeys(prevCurrentlyPressedKeys => prevCurrentlyPressedKeys.splice(i, 1))
                         break;
                     }
                 }
@@ -28,9 +29,9 @@ const TestInput = ({ pattern, keyStrokes, textBoxValue, setTextBoxValue }) => {
                 const currentTime = Date.now();
                 for (let i = 0; i < currentlyPressedKeys.length; i++) {
                     const keyPressInfo = currentlyPressedKeys[i];
-                    if (keyPressInfo.key === e.key) {
+                    if (keyPressInfo.key === e.key || keyPressInfo.key.toLowerCase() === e.key.toLowerCase()) {
                         keyStrokes.push(keyPressInfo);
-                        currentlyPressedKeys.splice(i, 1);
+                        // setCurrentlyPressedKeys(prevCurrentlyPressedKeys => prevCurrentlyPressedKeys.splice(i, 1))
                         break;
                     }
                 }

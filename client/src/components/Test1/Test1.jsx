@@ -4,7 +4,7 @@ import styles from "./Test1.module.css";
 import TestInput from "../TestInput/TestInput";
 const Test1 = ({ goNextSection, user, makeRequest }) => {
     const keyStrokes = [];
-    const [numIterations, setNumIterations] = useState(5);
+    const [numIterations, setNumIterations] = useState(1);
     const [textBoxValue, setTextBoxValue] = useState("");
     const decrementNumIterations = () => {
         setNumIterations((prevNumIterations) => prevNumIterations - 1);
@@ -29,7 +29,19 @@ const Test1 = ({ goNextSection, user, makeRequest }) => {
                     Prompt: <strong>.tie5Roanl</strong>
                 </div>
             </div>
-            <form className={styles.formSection} action="#" method="POST">
+            <form className={styles.formSection}
+                onSubmit={(e) => {
+                        e.preventDefault()
+                        const form = document.body.querySelector(`form`);
+                        if (form?.checkValidity()) {
+                            setTextBoxValue("");
+                            makeRequest("test1", user, keyStrokes);
+                            if (numIterations > 0) decrementNumIterations();
+                            else goNextSection();
+                        } else {
+                            form?.reportValidity();
+                        }
+                    }}>
                 <TestInput
                     pattern="\.tie5Roanl"
                     keyStrokes={keyStrokes}
@@ -38,20 +50,8 @@ const Test1 = ({ goNextSection, user, makeRequest }) => {
                 ></TestInput>
                 <input
                     className={commonStyles.nextButton}
-                    type="button"
+                    type="submit"
                     value="Next >"
-                    onSubmit={(e) => {
-                        e.preventDefault()
-                        const form = document.body.querySelector(`form`);
-                        if (form?.checkValidity()) {
-                            // setTextBoxValue("");
-                            makeRequest("test1", user, keyStrokes);
-                            if (numIterations > 0) decrementNumIterations();
-                            else goNextSection();
-                        } else {
-                            form?.reportValidity();
-                        }
-                    }}
                 />
             </form>
         </div>
